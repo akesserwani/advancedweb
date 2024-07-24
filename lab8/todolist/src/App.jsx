@@ -10,7 +10,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.trim() !== '') {
-      setTodos([...todos, { text: input, isEditing: false }]);
+      setTodos([...todos, { text: input, isEditing: false, isCompleted: false }]);
       setInput('');
     }
   };
@@ -42,6 +42,14 @@ function App() {
     setTodos(newTodos);
   };
 
+  // Handle toggle complete
+  const handleToggleComplete = (index) => {
+    const newTodos = todos.map((todo, i) =>
+      i === index ? { ...todo, isCompleted: !todo.isCompleted } : todo
+    );
+    setTodos(newTodos);
+  };
+
   return (
     <>
       <div style={{ margin: '20px' }}>
@@ -67,6 +75,7 @@ function App() {
             style={{
               width: '30%',
               height: 'auto',
+              border: '1px solid grey',
               padding: '5px',
               display: 'flex',
               flexDirection: 'row',
@@ -85,7 +94,16 @@ function App() {
                 }}
               />
             ) : (
-              <h6 style={{ marginLeft: '5px' }}>{todo.text}</h6>
+              <h6
+                style={{
+                  marginLeft: '5px',
+                  textDecoration: todo.isCompleted ? 'line-through' : 'none',
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleToggleComplete(index)}
+              >
+                {todo.text}
+              </h6>
             )}
             {/* Item box with edit and delete */}
             <div style={{ width: '30%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>

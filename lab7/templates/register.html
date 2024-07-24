@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<!--Main Container-->
+<div style = "width:100%; margin-left: 16px;">
+
+    <h4>Register</h4>
+    <br>
+    <form method = "POST" style = "width:50%;">
+        {{ form.hidden_tag() }}
+        <label>First Name</label>
+        {{ form.firstname }}
+        <label>Last Name</label>
+        {{ form.lastname }}
+        <label>Email</label>
+        {{ form.email }}
+        <label>Password</label>
+        {{ form.password }}
+        <label>Confirm Password</label>
+        {{ form.confirm_password }}
+
+        {{ form.submit(class_='waves-effect waves-light btn red') }}
+        <br>
+        <br>
+
+        <!--General form errors-->
+        {% for error in form.email.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+        {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      
+        <!--Password Errors-->
+        {% for error in form.password.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+
+    </form>
+
+</div>
+
+{% endblock content %}

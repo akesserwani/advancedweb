@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<!--Main Container-->
+<div style = "width:100%; margin-left: 16px;">
+
+    <h4>Log In</h4>
+    <br>
+    <form method = "POST" style = "width:50%;">
+        {{ form.hidden_tag() }}
+        <label>Email</label>
+        {{ form.email }}
+        <label>Password</label>
+        {{ form.password }}
+
+        {{ form.submit(class_='waves-effect waves-light btn red') }}
+        <br>
+        <br>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div style="color: red;">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+    </form>
+
+</div>
+
+{% endblock content %}
